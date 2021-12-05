@@ -1,0 +1,16 @@
+// crear package.json
+npm init --yes
+
+//instalar dependencias para usar ecmascript6 y no tener problemas de compatibilidad
+npm i @babel/node @babel/core @babel/preset-env @babel/cli -D
+agregar a package.json:
+ "scripts": {
+    "start": "nodemon src/index.js --exec babel-node", 
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+//npm i nodemon -D
+actualizaciones automaticas del servidor cuando hago cambios en algun archivo.
+
+//instalar cliente servidor tiempo real. y manejador de rutas http express.
+npm i express socket.io 
