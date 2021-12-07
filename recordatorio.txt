@@ -14,3 +14,13 @@ actualizaciones automaticas del servidor cuando hago cambios en algun archivo.
 
 //instalar cliente servidor tiempo real. y manejador de rutas http express.
 npm i express socket.io 
+
+//generador de id.
+npm i uuid
+
+
+
+//SOCKET.IO (comentarios)
+-"connection "  es un evento socket. traemos informacion del nuevo socket que se conecto.
+- con "io." nos referimos que se tiene que actualizar en todos los clientes conectados.
+- con emit, solo se actualiza en un cliente, o cuando refresca navegador.

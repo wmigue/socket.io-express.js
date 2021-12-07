@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>crud socket.io y node js</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='./main.css'>
-    
+
 </head>
+
 <body>
-    <h1>crud</h1>
-    <script src="/socket.io/socket.io.min.js"></script> <!-- va antes del main.js -->
-    <script src='./main.js'></script> 
-   
+
+
+    <div style="text-align: center;">
+        <form id="formulario">
+            <h3>Agregar nota</h3>
+            <input id="title" placeholder="titulo" /><br>
+            <textarea id="description" placeholder="descripción"></textarea><br>
+            <button id="send">enviar</button>
+        </form>
+    </div>
+    <div id="notas">
+
+    </div>
+
+
+    <!-- poner en este orden  -->
+    <script src="/socket.io/socket.io.min.js"></script> 
+    <script src="./ui.js"></script>
+    <script src="./socket.js"></script>
+    <script src='./main.js'></script>
+
 </body>
+
 </html>

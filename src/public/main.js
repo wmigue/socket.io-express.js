@@ -1,9 +1,17 @@
 //CLIENTE
 
-const socket = io() //nueva conexion desde cliente ID: xxxxxxxxxx
 
-//escuchando desde 
-socket.on('mensaje1', ()=>{ 
-    console.log("escuchando...") //cuando hay una nueva conexion se dispara este console.log
-    socket.emit("mensaje2")
+const noteForm = document.querySelector('#formulario')
+const noteTitle = document.querySelector('#title')
+const noteDescription = document.querySelector('#description')
+
+
+noteForm.addEventListener('submit', (e) => { 
+    e.preventDefault()
+    saveNote(noteTitle.value, noteDescription.value)
 })
+
+
+
+
+
