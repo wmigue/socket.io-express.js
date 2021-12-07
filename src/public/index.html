@@ -7,27 +7,30 @@
     <title>crud socket.io y node js</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='./main.css'>
-
 </head>
 
 <body>
 
-
-    <div style="text-align: center;">
-        <form id="formulario">
-            <h3>Agregar nota</h3>
-            <input id="title" placeholder="titulo" /><br>
-            <textarea id="description" placeholder="descripción"></textarea><br>
-            <button id="send">enviar</button>
-        </form>
+    <div class="contenedor">
+        <div class="header">
+          🔥 CHAT V1.0
+        </div>
+        <div class="formato2">
+            <div id="notas"></div>
+        </div>
+        <div class="formato1">
+            <form id="formulario">
+                <input id="title" placeholder="nombre" required />
+                <input id="description" placeholder="mensajes" required />
+                <button id="send">enviar</button>
+            </form>
+        </div>
     </div>
-    <div id="notas">
 
-    </div>
 
 
     <!-- poner en este orden  -->
-    <script src="/socket.io/socket.io.min.js"></script> 
+    <script src="/socket.io/socket.io.min.js"></script>
     <script src="./ui.js"></script>
     <script src="./socket.js"></script>
     <script src='./main.js'></script>

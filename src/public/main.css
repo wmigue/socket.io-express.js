@@ -1,0 +1,65 @@
+input, button, textarea{
+    border: none;
+    padding: 10px;
+    margin: 2px;
+    border-radius: 3px;
+}
+
+#title{
+    background-color: rgb(255, 161, 39);
+    width: 5%; 
+  
+}
+
+#description{
+    background-color: rgb(255, 213, 158);
+    width: 40%;  
+}
+
+#send{
+    width: 100px;
+}
+
+#notas{
+    margin-left: 30px;
+}
+#formulario{
+    margin:3px;
+    padding: 10px;
+    background-color: antiquewhite;
+
+}
+
+.formato1{
+    text-align: center;
+}
+.formato2{
+    text-align: left;
+    background-color: rgb(255, 251, 244);
+    margin: 3px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.reloj{
+    font-size: 10px;
+
+}
+.contenedor{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+.header{
+    padding: 20px;
+    margin-bottom: 3px;
+    background: rgb(205,205,205);
+    background: linear-gradient(183deg, rgba(255, 188, 63, 0.802) 0%, rgba(255,240,201,1) 100%);
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+
+}

@@ -1,4 +1,7 @@
-const socket = io() //nueva conexion desde cliente ID: xxxxxxxxxx
+//CLIENTE (socket)
+
+
+const socket = io() 
 
 const saveNote = (t, d) => {
     socket.emit('cliente:newnote', {
