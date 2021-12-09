@@ -21,6 +21,6 @@ npm i uuid
 
 
 //SOCKET.IO (comentarios)
--"connection "  es un evento socket. traemos informacion del nuevo socket que se conecto.
+-"connection " es un evento del socket, cuando alguien se conecta.
 - con "io." nos referimos que se tiene que actualizar en todos los clientes conectados.
-- con emit, solo se actualiza en un cliente, o cuando refresca navegador.
+- con "socket", solo se actualiza en un cliente, o cuando refresca navegador ese cliente.

@@ -38,7 +38,9 @@ input, button, textarea{
     background-color: rgb(255, 251, 244);
     margin: 3px;
     padding: 10px;
+    padding-top: 10vh;
     border-radius: 5px;
+    height: 100vh;
 }
 .reloj{
     font-size: 10px;
