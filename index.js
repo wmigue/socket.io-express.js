@@ -4,6 +4,7 @@ import { Server as Sockete } from 'socket.io'
 import http from 'http'
 import { v4 as uuid } from 'uuid'
 import bodyParser from 'body-parser'
+import process from 'process'
 var path = require("path")
 const { engine } = require('express-handlebars')
 const cookieParser = require('cookie-parser')
@@ -11,6 +12,10 @@ const app = express()
 require('dotenv').config()
 const mongoose = require('mongoose')
 const Users = require('./models/Users')
+
+// Google Auth
+const { OAuth2Client } = require('google-auth-library')
+const client = new OAuth2Client(process.env.CLIENT_ID)
 
 //app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -28,44 +33,99 @@ mongoose.connect(process.env.MONGO_URI, {
 });
 
 
+
+
+//middlewares
+function checkAuthenticated(req, res, next) {
+    let token = req.cookies['session-token']
+    let user = {}
+    async function verify() {
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            requiredAudience: process.env.CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+        })
+        const payload = ticket.getPayload()
+        user.name = payload.name
+        user.email = payload.email
+        user.picture = payload.picture
+        console.log(payload)
+    }
+    verify()
+        .then(() => {
+            req.user = user
+            next();
+        })
+        .catch(err => {
+            console.log(token)
+            res.send('error usuario / contraseña inválido.')
+        })
+}
+
+
 // rutas
+app.get('/chat', checkAuthenticated, (req, res) => {
+    let user = req.user
+    res.render('chat', { user })
+})
+
+
+
+
 app.get('/', (req, res) => {
     res.render('login')
 })
 
 
 
+
 app.post('/', (req, res) => {
-    const { email, password } = req.body;
-    Users.findOne({ email: email, password: password }).exec()
-        .then(x => {
-            if (x) {
-                res.render('chat.hbs')
-            } else {
-                res.render('error.hbs', {
-                    tipo: "error, contraseña incorrecta / usuario no existe..."
+    let token = req.body.token
+    let pl = {}
+    async function verify() {
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            requiredAudience: process.env.CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+        });
+        const payload = ticket.getPayload()
+        const userid = payload['sub']
+        pl.name = payload['name']
+        pl.email = payload['email']
+        pl.picture = payload['picture']
+    }
+    verify()
+        .then(() => {
+            res.cookie('session-token', token)
+            res.send('success')
+            Users.findOne({ email: pl.email }).exec()
+                .then(x => {
+                    if (x == null) {
+                        Users.create({
+                            name: pl.name,
+                            email: pl.email,
+                            password: pl.password
+                        })
+                    }
                 })
-            }
         })
+        .catch(console.error)
+
 })
 
 
 
-app.post('/nuevoUsuario', (req, res) => {
-    const { email, password } = req.body
-    Users.findOne({ email }).exec()
-        .then(x => {
-            if (x) {
-                return res.send('ese usuario ya existe.')
-            }
-            Users.create({
-                email: email,
-                password: password, //lo guardo.
-            }).then(() => {
-                res.send('usuario creado con èxito.')
-            })
-        })
-})
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

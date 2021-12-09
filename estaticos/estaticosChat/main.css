@@ -3,11 +3,14 @@ input, button, textarea{
     padding: 10px;
     margin: 2px;
     border-radius: 3px;
+    outline: none;
 }
+
 
 #title{
     background-color: rgb(255, 161, 39);
-    width: 5%; 
+    width: 10%; 
+    display: none;
   
 }
 
@@ -71,4 +74,22 @@ input, button, textarea{
     left: 0;
     width: 100vw;
 
+}
+
+@media (max-width: 1080px) {
+    #avatar {
+        border-radius: 50%;
+        width: 10%;
+        height: 10%;
+        vertical-align:middle;
+      }
+}
+
+@media (min-width: 1081px) {
+    #avatar {
+        border-radius: 50%;
+        width: 2%;
+        height: 2%;
+        vertical-align:middle;
+      }
 }

@@ -2,8 +2,10 @@ const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
 const Users = mongoose.model('User', new schema({
+    name: String,
     email: String,
-    password: String,
+    picture: String,
+
 
 }))
 
