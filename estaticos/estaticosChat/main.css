@@ -22,6 +22,8 @@ input, button, textarea{
 
 #notas{
     margin-left: 30px;
+
+
 }
 #formulario{
     margin:3px;
@@ -32,25 +34,30 @@ input, button, textarea{
 
 .formato1{
     text-align: center;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 99vw;
 }
 .formato2{
     text-align: left;
     background-color: rgb(255, 251, 244);
     margin: 3px;
+    margin-bottom: 70px;
     padding: 10px;
     padding-top: 10vh;
     border-radius: 5px;
-    height: 100vh;
+  
+
 }
 .reloj{
     font-size: 10px;
 
 }
 .contenedor{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     height: 100vh;
+
+    
 }
 
 .header{
