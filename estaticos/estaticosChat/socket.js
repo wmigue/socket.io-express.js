@@ -17,3 +17,10 @@ socket.on('server:newnote', (data) => {
 socket.on('server:loadnotes', (data) => {
     loadNotes(data)
 })
+
+socket.on('server:loadusers', (data) => {
+    appendUser(data)
+})
+
+
+

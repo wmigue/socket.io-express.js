@@ -27,10 +27,10 @@ app.use("/estaticos/estaticosChat", express.static(__dirname + "/estaticos/estat
 app.use("/estaticos/estaticosLogin", express.static(__dirname + "/estaticos/estaticosLogin"))
 
 // Conexión a Base de datos
-mongoose.connect(process.env.MONGO_URI, {
+/* mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-});
+}); */
 
 
 
@@ -48,7 +48,7 @@ function checkAuthenticated(req, res, next) {
         user.name = payload.name
         user.email = payload.email
         user.picture = payload.picture
-        console.log(payload)
+        //console.log(payload)
     }
     verify()
         .then(() => {
@@ -56,8 +56,8 @@ function checkAuthenticated(req, res, next) {
             next();
         })
         .catch(err => {
-            console.log(token)
-            res.send('error usuario / contraseña inválido.')
+            //console.log(token)
+            res.render('error', {tipo: "no estás autenticado."})
         })
 }
 
@@ -74,6 +74,7 @@ app.get('/chat', checkAuthenticated, (req, res) => {
 app.get('/', (req, res) => {
     res.render('login')
 })
+
 
 
 
@@ -134,13 +135,16 @@ const server = http.createServer(app)
 const io = new Sockete(server) //queda pendiente del servidor
 
 const ArrNotas = []
+const ArrUsers = []
 
-//cada que alguien se conecte o refresque navegador.
+
 io.on('connection', (socket) => {
-
-    console.log('nueva conexion desde cliente ID: ' + socket.id)
-
-    socket.emit('server:loadnotes', ArrNotas) //envio el array a la interfaz de los usuarios.
+    console.log('nueva conexion desde cliente ID: ' + (socket.id))
+    
+    socket.emit('server:loadnotes', ArrNotas) //servidor envia las notas para que las pinte este cliente socket.
+   
+    ArrUsers.push(socket.id)
+    io.emit('server:loadusers', ArrUsers)
 
     socket.on('cliente:newnote', (data) => {  //cuando envio el formulario con submit
         const nota = {
@@ -149,10 +153,29 @@ io.on('connection', (socket) => {
             id: uuid()
         }
         ArrNotas.push(nota) // agrego nota al array base.
-        io.emit('server:newnote', nota) //emito esta nota a todos los clientes conectados. (con socket.emit solo enviaria a ese socket o cliente individual, en cambio con io.emit envio a todos los sockets conectados.)
+        io.emit('server:newnote', nota) //emito esta nota a todos los clientes conectados. (con socket.emit solo enviaria a ese socket o cliente individual, en cambio con io.emit envio a todos los sockets conectados.)     
     })
 
+    socket.on('disconnect', ()=> {
+        console.log('se desconecto ' + socket.id)
+        ArrUsers.splice(ArrUsers.indexOf(socket.id), 1)
+        io.emit('server:loadusers', ArrUsers) 
+     })    
 })
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
 
 
 const PORT = process.env.PORT || 3000

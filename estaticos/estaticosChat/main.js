@@ -9,8 +9,8 @@ const noteDescription = document.querySelector('#description')
 noteForm.addEventListener('submit', (e) => { 
     e.preventDefault()
     saveNote(noteTitle.value, noteDescription.value)
-    
 })
+
 
 
 

@@ -1,4 +1,5 @@
 const notas = document.querySelector('#notas')
+const usuarios = document.querySelector('#usuarios')
 
 const appendNote = (data) => {
     let reloj = new Date()
@@ -10,5 +11,13 @@ const loadNotes = (data) => {
     data.forEach(el => {
         appendNote(el)
     });
+}
+
+const appendUser = (users)=>{
+    usuarios.innerHTML=""
+    users.forEach(el => {
+        usuarios.innerHTML+= `-  <b>${el}</b> -`
+    })
+  
 }
 
