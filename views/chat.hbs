@@ -1,0 +1,26 @@
+<div class="contenedor">
+    <div class="header">
+        usuarios conectados:
+        <div id="usuarios"> </div>
+    </div>
+    <div class="formato2">
+        <div id="notas"></div>
+    </div>
+    <div class="formato1">
+        <form id="formulario">
+            <img id="avatar" src="{{user.picture}}">
+            <input id="title" placeholder="nombre" value="{{user.name}}"/>
+            <input id="description" placeholder="mensajes" required />
+            <button id="send">enviar</button>
+        </form>
+    </div>
+</div>
+
+
+
+<!-- poner en este orden  -->
+<script src="/socket.io/socket.io.min.js"></script>
+<script src="../estaticos/estaticosChat/ui.js"></script>
+<script src="../estaticos/estaticosChat/socket.js"></script>
+<script src='../estaticos/estaticosChat/main.js'></script>
+<link rel='stylesheet' href='../estaticos/estaticosChat/main.css'>
